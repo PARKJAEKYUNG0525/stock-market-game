@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>회원가입</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <h2>회원가입</h2>
+
+    <table>
+      <tr>
+        <td>아이디</td>
+        <td><input type="text" id="username" placeholder="영문, 숫자, _ (4~20자)"></td>
+      </tr>
+      <tr>
+        <td>이메일</td>
+        <td><input type="email" id="email" placeholder="example@email.com"></td>
+      </tr>
+      <tr>
+        <td>비밀번호</td>
+        <td><input type="password" id="password" placeholder="8자 이상, 영문+숫자 포함"></td>
+      </tr>
+      <tr>
+        <td>비밀번호 확인</td>
+        <td><input type="password" id="confirm" placeholder="비밀번호 재입력"></td>
+      </tr>
+    </table>
+
+    <div id="error-msg"></div>
+
+    <div class="btn-row">
+      <button onclick="doSignup()">회원가입</button>
+      <button onclick="clearForm()">취소</button>
+    </div>
+
+    <div class="find-links">
+      <a href="login.html">이미 계정이 있으신가요? 로그인</a>
+    </div>
+  </div>
+
+  <script type="module" src="signup.js"></script>
+
+</body>
+</html>

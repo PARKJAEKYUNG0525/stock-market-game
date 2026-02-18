@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <h2>로그인</h2>
+
+    <table>
+      <tr>
+        <td>아이디</td>
+        <td><input type="text" id="userId" placeholder="아이디 입력"></td>
+      </tr>
+      <tr>
+        <td>비밀번호</td>
+        <td><input type="password" id="userPw" placeholder="비밀번호 입력" onkeydown="handleEnter(event)"></td>
+      </tr>
+    </table>
+
+    <div id="error-msg">아이디 또는 비밀번호가 잘못되었습니다.</div>
+
+    <div class="btn-row">
+      <button onclick="doLogin()">로그인</button>
+      <button onclick="clearForm()">취소</button>
+    </div>
+
+    <div class="find-links">
+      <a href="#">아이디 찾기</a>
+      <span>|</span>
+      <a href="#">비밀번호 찾기</a>
+      <span>|</span>
+      <a href="signup.html">회원가입</a>
+    </div>
+  </div>
+  <script type="module" src="login.js"></script>
+
+
+</body>
+</html>
