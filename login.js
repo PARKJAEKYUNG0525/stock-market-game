@@ -37,8 +37,9 @@ async function doLogin() {
     }
 
     // Firestore에서 username으로 이메일 찾기
+    // 1. 'users' 컬렉션을 지정
     const q = query(collection(db, 'users'), where('username', '==', id));
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q); // 2. 실제로 DB에 요청해서 데이터 가져오기, 데이터 받아올 때까지 기다림 (비동기)
 
     if (snapshot.empty) {
       errorMsg.textContent   = '존재하지 않는 아이디입니다.';
@@ -46,9 +47,9 @@ async function doLogin() {
       return;
     }
 
-    const email = snapshot.docs[0].data().email;
+    const email = snapshot.docs[0].data().email; // 3. 결과 사용
 
-    // 이메일로 로그인
+    // 이메일로 로그인  Firebase 함수
     await signInWithEmailAndPassword(auth, email, pw);
     errorMsg.style.display = 'none';
     window.location.href   = 'main.html';
@@ -79,6 +80,7 @@ function clearForm() {
   document.getElementById('userId').focus();
 }
 
+//window(전역객체)에 연결
 window.doLogin     = doLogin;
 window.handleEnter = handleEnter;
 window.clearForm   = clearForm;
