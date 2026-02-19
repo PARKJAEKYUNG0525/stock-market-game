@@ -1,0 +1,202 @@
+/* 버튼 공통 속성 */
+.btn--small {
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.btn--big {
+  border-radius: 20px;
+  padding: 9px 20px;
+  cursor: pointer;
+}
+
+/* 배경 */
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f0f2f5;
+  overflow: hidden;
+}
+
+/* 게임 제목, 인사말, 저장&불러오기 */
+header {
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.headerLeft,
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerLeft h2 {
+  padding-left: 20px;
+  font-weight: 900;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.headerLeft h4 {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 400;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 20px;
+}
+
+.btn--save {
+  border: none;
+  background-color: #d9d9d9;
+  font-size: 13px;
+}
+
+.btn--import {
+  border-color: #d9d9d9;
+  font-size: 13px;
+}
+
+/* 상점, 다음 날, 보유 잔고 */
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #d9d9d9;
+  border-bottom: 1px solid #cccccc;
+}
+
+.navItem {
+  flex: 1;
+  padding: 14px 0;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  margin: 0;
+  padding: 2%;
+  gap: 10px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.randomEvent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.randomEvent h3 {
+  padding: 18px 0 16px;
+  text-align: center;
+  border-bottom: 1.5px solid #e1e4e8;
+}
+
+.randomEvent ul {
+  display: flex;
+  padding: 20px 24px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.randomEvent li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+  font-size: 0.88rem;
+  color: #222;
+}
+
+.tradingZone {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.tradingTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.tradingTable thead tr {
+  background: #ffffff;
+}
+
+.tradingTable thead th {
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  border-bottom: 1.5px solid #e8e8e8;
+}
+
+.tradingTable tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tradingTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tradingTable tbody td {
+  padding: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #222;
+  vertical-align: middle;
+}
+
+.td-stock {
+  font-weight: 500;
+  color: #333;
+}
+
+.td-price {
+  font-weight: 700;
+}
+
+.td-change {
+  font-weight: 700;
+}
+
+.td-wallet {
+  font-weight: 700;
+}
+
+.btn--buy {
+  white-space: nowrap;
+}
+
+.btn--end {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  background-color: #e53935;
+  border: none;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.35);
+}

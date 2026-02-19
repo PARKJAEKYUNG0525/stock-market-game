@@ -1,195 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MoneyGame</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockMarketGame</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<style>
-body { 
-margin:0; font-family:sans-serif; 
-}
-#gametitle { 
-margin:0; border:solid darkred; padding:10px; 
-}
+  <body>
+    <header>
+      <div class="headerLeft">
+        <h2>MoneyGame</h2>
+        <h4>안녕하세요, ㅇㅇㅇ님</h4>
+      </div>
+      <div class="headerRight">
+        <button type="button" class="btn--big btn--save">저장하기</button>
+        <button type="button" class="btn--big btn--import">불러오기</button>
+      </div>
+    </header>
 
-.container { 
-display:flex; 
-}
-.column { 
-display:flex; flex-direction:column; margin:10px; 
-}
+    <nav>
+      <span class="navItem" onclick="shop()">상점</span>
+      <span class="navItem" onclick="nextDay()">다음 날</span>
+      <div class="navItem">
+        <span>보유 잔고 :</span>
+        <span id="money">10000</span>
+      </div>
+    </nav>
 
-nav {
-    border:solid darkgreen;
-    padding:10px;
-    width:150px;
-}
-
-main {
-    flex:1;
-    border:solid darkgoldenrod;
-    padding:10px;
-}
-
-ul { padding-left:0; list-style-position:inside; }
-h3,h4,h5 { margin:3px 0; }
-
-input { width:60px; }
-button { width:50px; }
-</style>
-</head>
-
-<body>
-
-<h2 id="gametitle">MoneyGame</h2>
-
-<div class="container">
-
-<nav>
-    <h4>Menu</h4>
-    <ul>
-        <li onclick="nextDay()">next day</li>
-        <li onclick="shop()">shop</li>
-        <li onclick="gameStop()">gameEnd</li>
-    </ul>
-    <hr>
-    <h4>보유 잔고</h4>
-    <h4 id="money">10000</h4>
-</nav>
-
-<main>
-
-<!-- 가격 -->
-<div class="container">
-    <div class="column"><h4>Jelly</h4><h3 class="price">1000</h3></div>
-    <div class="column"><h4>Candy</h4><h3 class="price">1000</h3></div>
-    <div class="column"><h4>Cookie</h4><h3 class="price">1000</h3></div>
-    <div class="column"><h4>Cupcake</h4><h3 class="price">1000</h3></div>
-    <div class="column"><h4>Chocolate</h4><h3 class="price">1000</h3></div>
-</div>
-
-<hr>
-
-<!-- 거래 -->
-<div class="container">
-
-    <div class="column">
-        <h4>Jelly</h4>
-        <h5 class="wallet">보유 : 0</h5>
-        <input type="text" class="input">
-        <div>
-            <button onclick="buy(0)">buy</button>
-            <button onclick="sell(0)">sell</button>
-        </div>
-    </div>
-
-    <div class="column">
-        <h4>Candy</h4>
-        <h5 class="wallet">보유 : 0</h5>
-        <input type="text" class="input">
-        <div>
-            <button onclick="buy(1)">buy</button>
-            <button onclick="sell(1)">sell</button>
-        </div>
-    </div>
-
-    <div class="column">
-        <h4>Cookie</h4>
-        <h5 class="wallet">보유 : 0</h5>
-        <input type="text" class="input">
-        <div>
-            <button onclick="buy(2)">buy</button>
-            <button onclick="sell(2)">sell</button>
-        </div>
-    </div>
-
-    <div class="column">
-        <h4>Cupcake</h4>
-        <h5 class="wallet">보유 : 0</h5>
-        <input type="text" class="input">
-        <div>
-            <button onclick="buy(3)">buy</button>
-            <button onclick="sell(3)">sell</button>
-        </div>
-    </div>
-
-    <div class="column">
-        <h4>Chocolate</h4>
-        <h5 class="wallet">보유 : 0</h5>
-        <input type="text" class="input">
-        <div>
-            <button onclick="buy(4)">buy</button>
-            <button onclick="sell(4)">sell</button>
-        </div>
-    </div>
-
-</div>
-
-</main>
-</div>
-
-<script>
-function buy(idx){
-    let money = document.getElementById("money");
-    let prices = document.getElementsByClassName("price");
-    let wallets = document.getElementsByClassName("wallet");
-    let inputs = document.getElementsByClassName("input");
-
-    let price = parseInt(prices[idx].innerText);
-    let qty = parseInt(inputs[idx].value);
-
-    if(isNaN(qty) || qty <= 0){
-        alert("수량을 숫자로 입력하세요");
-        return;
-    }
-
-    let total = price * qty;
-    let currentMoney = parseInt(money.innerText);
-
-    if(currentMoney < total){
-        alert("돈이 부족합니다");
-        return;
-    }
-
-    currentMoney -= total;
-    money.innerText = currentMoney;
-
-    let currentStock = parseInt(wallets[idx].innerText.replace("보유 : ",""));
-    wallets[idx].innerText = "보유 : " + (currentStock + qty);
-}
-
-function sell(idx){
-    let money = document.getElementById("money");
-    let prices = document.getElementsByClassName("price");
-    let wallets = document.getElementsByClassName("wallet");
-    let inputs = document.getElementsByClassName("input");
-
-    let price = parseInt(prices[idx].innerText);
-    let qty = parseInt(inputs[idx].value);
-
-    if(isNaN(qty) || qty <= 0){
-        alert("수량을 숫자로 입력하세요");
-        return;
-    }
-
-    let currentStock = parseInt(wallets[idx].innerText.replace("보유 : ",""));
-
-    if(currentStock < qty){
-        alert("보유 수량 부족");
-        return;
-    }
-
-    wallets[idx].innerText = "보유 : " + (currentStock - qty);
-
-    let currentMoney = parseInt(money.innerText);
-    money.innerText = currentMoney + (price * qty);
-}
-
-function nextDay(){ alert("다음날! (가격 변동 기능 추가 가능)"); }
-function shop(){ alert("준비중입니다!"); }
-function gameStop(){ alert("게임 종료"); }
-</script>
-
-</body>
+    <main>
+      <section class="randomEvent">
+        <h3>최근 뉴스</h3>
+        <ul>
+          <li>
+            <span class="eventName">이벤트명</span>
+            <span class="eventType">(이벤트 효과) (몇 턴 동안 지속)</span>
+          </li>
+          <li>
+            <span class="eventName">이벤트명2</span>
+            <span class="eventType">(이벤트 효과) (몇 턴 동안 지속)</span>
+          </li>
+        </ul>
+      </section>
+      <section class="tradingZone">
+        <table class="tradigTable">
+          <thead>
+            <tr>
+              <th>상품명</th>
+              <th>현재가</th>
+              <th>변동가</th>
+              <th>구매/판매</th>
+              <th>매수가</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>상품1</td>
+              <td class="td-price">100</td>
+              <td>▲0</td>
+              <td><button type="button" class="btn--small btn--buy">구매하기</button></td>
+              <td class="td-wallet">0</td>
+            </tr>
+            <tr>
+              <td>상품2</td>
+              <td class="td-price">1,000</td>
+              <td>▲0</td>
+              <td><button type="button" class="btn--small btn--buy">구매하기</button></td>
+              <td class="td-wallet">0</td>
+            </tr>
+            <tr>
+              <td>상품3</td>
+              <td class="td-price">10,000</td>
+              <td>▲0</td>
+              <td><button type="button" class="btn--small btn--buy">구매하기</button></td>
+              <td class="td-wallet">0</td>
+            </tr>
+            <tr>
+              <td>상품4</td>
+              <td class="td-price">100,000</td>
+              <td>▲0</td>
+              <td><button type="button" class="btn--small btn--buy">구매하기</button></td>
+              <td class="td-wallet">0</td>
+            </tr>
+            <tr>
+              <td class="td-stock">상품5</td>
+              <td class="td-price">1,000,000</td>
+              <td class="td-change">▲0</td>
+              <td><button type="button" class="btn--small btn--buy">구매하기</button></td>
+              <td class="td-wallet">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <button type="button" class="btn--big btn--end" onclick="endGame()">
+      게임 종료
+    </button>
+    <script src="js/main.js" defer></script>
+  </body>
 </html>
