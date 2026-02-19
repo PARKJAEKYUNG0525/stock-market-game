@@ -1,3 +1,7 @@
+const username = localStorage.getItem('username');
+const greeting = document.querySelector('h4');
+greeting.textContent = `안녕하세요, ${username}님`;
+
 function buy(idx){
     let money = document.getElementById("money");
     let prices = document.getElementsByClassName("td-price");

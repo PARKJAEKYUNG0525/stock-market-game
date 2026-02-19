@@ -53,6 +53,7 @@ async function doLogin() {
     await signInWithEmailAndPassword(auth, email, pw);
     errorMsg.style.display = 'none';
     window.location.href   = 'main.html';
+    localStorage.setItem('username', id);  // id는 이미 입력값
 
   } catch (err) {
     errorMsg.style.display = 'block';
