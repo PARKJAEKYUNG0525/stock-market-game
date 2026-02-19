@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Firebase Login Test",
+            "url": "http://127.0.0.1:5501/login.html", // 포트를 5501로 수정했습니다!
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
