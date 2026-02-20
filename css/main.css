@@ -18,6 +18,7 @@ body {
   font-family: sans-serif;
   background-color: #f0f2f5;
   overflow: hidden;
+  height: 100vh; /* 전체 높이 고정 */
 }
 
 /* 게임 제목, 인사말, 저장&불러오기 */
@@ -90,6 +91,16 @@ main {
   gap: 10px;
   justify-content: center;
   align-items: stretch;
+  min-height: 0; /* flex 자식이 넘치지 않도록 */
+}
+
+/* 왼쪽 패널 (뉴스 + 리더보드 수직 배치) */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  min-height: 0;
 }
 
 .randomEvent {
@@ -99,6 +110,7 @@ main {
   overflow: hidden;
   border-radius: 16px;
   background: #ffffff;
+  min-height: 0; 
 }
 
 .randomEvent h3 {
@@ -199,4 +211,37 @@ main {
   font-weight: 700;
   white-space: nowrap;
   box-shadow: 0 2px 8px rgba(229, 57, 53, 0.35);
+}
+
+.leaderboard-section {
+  display: flex;
+  flex: 0 0 auto; /* 변경: 내용 크기만큼만 차지 */
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.leaderboard-section .lb-title {
+  text-align: center; /* font: center 오타 수정 */
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 14px 0 12px; /* margin 대신 padding */
+  border-bottom: 1.5px solid #e1e4e8; /* 구분선 */
+}
+
+.leaderboard-section .lb-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-section .lb-table td {
+  padding: 8px 16px; /* 패딩 살짝 증가 */
+  font-size: 0.9rem;
+  color: #333;
+  text-align: left;
+}
+
+.leaderboard-section .lb-table tr + tr td {
+  border-top: 1px solid #f1f5f8;
 }
