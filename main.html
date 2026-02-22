@@ -21,7 +21,7 @@
 
     <nav>
       <span class="navItem" onclick="shop()">상점</span>
-      <span class="navItem" onclick="nextDay()">다음 날</span>
+      <span class="navItem" onclick="nextTime()">시간 보내기</span>
       <div class="navItem">
         <span>보유 잔고 :</span>
         <span id="money">10000</span>
@@ -30,20 +30,12 @@
 
     <main>
       <div class="leftPanel">
-      <section class="randomEvent">
+      <section class="randomEvent-section">
         <h3>최근 뉴스</h3>
-        <ul>
-          <li>
-            <span class="eventName">이벤트명</span>
-            <span class="eventType">(이벤트 효과) (몇 턴 동안 지속)</span>
-          </li>
-          <li>
-            <span class="eventName">이벤트명2</span>
-            <span class="eventType">(이벤트 효과) (몇 턴 동안 지속)</span>
-          </li>
+        <ul class="eventList">
         </ul>
       </section>
-      <div class="leaderboard-section">
+      <section class="leaderboard-section">
       <div class="lb-title">보유 자산 Top 5</div>
       <table class="lb-table">
         <tbody>
@@ -54,10 +46,10 @@
           <tr><td>5th</td><td>사용자5</td><td>600</td></tr>
         </tbody>
       </table>
+    </section>
     </div>
-    </div>
-      <section class="tradingZone">
-        <table class="tradigTable">
+      <section class="tradingZone-section">
+        <table class="tradingTable">
           <thead>
             <tr>
               <th>상품명</th>
@@ -69,35 +61,35 @@
           </thead>
           <tbody>
             <tr>
-              <td>상품1</td>
+              <td>구름 과자 공장</td>
               <td class="td-price">100</td>
-              <td>▲0</td>
+              <td class="td-change">▲0</td>
               <td><button type="button" class="btn--small btn--buy" onclick="buyProduct(0)">구매하기</button></td>
               <td class="td-wallet">0</td>
             </tr>
             <tr>
-              <td>상품2</td>
+              <td>연금술 제약</td>
               <td class="td-price">1,000</td>
-              <td>▲0</td>
+              <td class="td-change">▲0</td>
               <td><button type="button" class="btn--small btn--buy" onclick="buyProduct(1)">구매하기</button></td>
               <td class="td-wallet">0</td>
             </tr>
             <tr>
-              <td>상품3</td>
+              <td>드래곤 광산</td>
               <td class="td-price">10,000</td>
-              <td>▲0</td>
+              <td class="td-change">▲0</td>
               <td><button type="button" class="btn--small btn--buy" onclick="buyProduct(2)">구매하기</button></td>
               <td class="td-wallet">0</td>
             </tr>
             <tr>
-              <td>상품4</td>
+              <td>거울아 거울아</td>
               <td class="td-price">100,000</td>
-              <td>▲0</td>
+              <td class="td-change">▲0</td>
               <td><button type="button" class="btn--small btn--buy" onclick="buyProduct(3)">구매하기</button></td>
               <td class="td-wallet">0</td>
             </tr>
             <tr>
-              <td class="td-stock">상품5</td>
+              <td>요정의 숲</td>
               <td class="td-price">1,000,000</td>
               <td class="td-change">▲0</td>
               <td><button type="button" class="btn--small btn--buy" onclick="buyProduct(4)">구매하기</button></td>
