@@ -1,3 +1,21 @@
+// Firebase import (main.js 최상단)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyBP0SC_o8i4yAk2MI7qYZRzMkYZyESG2ZU",
+  authDomain:        "loginprojecrt.firebaseapp.com",
+  projectId:         "loginprojecrt",
+  storageBucket:     "loginprojecrt.firebasestorage.app",
+  messagingSenderId: "550110304627",
+  appId:             "1:550110304627:web:458c76fe59b4f7980f0d06"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+const auth = getAuth(app);
+
 const username = localStorage.getItem('username');
 const greeting = document.querySelector('h4');
 greeting.textContent = `안녕하세요, ${username}님`;
@@ -52,6 +70,8 @@ function buyProduct(idx) {
     // 보유 수량 증가
     let currentStock = parseInt(wallets[idx].innerText) || 0;
     wallets[idx].innerText = currentStock + 1;
+
+    saveMoney()
 }
 
 function selProduct(idx) {
@@ -69,6 +89,8 @@ function selProduct(idx) {
     money.innerText = currentMoney.toLocaleString();
 
     wallets[idx].innerText = currentStock - 1;
+
+    saveMoney()
 }
 
 function buy(idx) {
@@ -126,6 +148,39 @@ function sell(idx) {
     let currentMoney = parseInt(money.innerText);
     money.innerText = currentMoney + (price * qty);
 }
+
+// 보유금액 Firebase에 저장
+async function saveMoney() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const currentMoney = parseInt(money.innerText.replace(/,/g, ''));
+
+    await setDoc(doc(db, "users", user.uid), {
+        money: currentMoney
+    }, { merge: true }); // merge: true → username, email 등 기존 필드 유지!
+}
+
+// Firebase에서 보유금액 불러오기
+async function loadMoney() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const docSnap = await getDoc(doc(db, "users", user.uid));
+    if (docSnap.exists() && docSnap.data().money !== undefined) {
+        money.innerText = docSnap.data().money.toLocaleString();
+    }
+}
+
+// 로그인 상태 감지 → 자동 불러오기
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        loadMoney();
+    } else {
+        // 로그인 안 된 상태면 로그인 페이지로
+        window.location.href = "login.html";
+    }
+});
 
 //모든 li의 spendSpan 선택하여 버튼 클릭 시 +1시간
 function increaseAll() {
@@ -278,5 +333,14 @@ function shop() {
 }
 
 function endGame() {
-    alert("게임 종료");
+    if (confirm("게임 종료 하시겠습니까 ?")) {
+        window.location.href = "login.html"; // 로그인 페이지 경로
+    }
 }
+
+// 모듈에서 인라인 onclick이 작동하도록 전역 등록
+window.buyProduct = buyProduct;
+window.selProduct = selProduct;
+window.endGame    = endGame;
+window.nextTime   = nextTime;
+window.shop       = shop;
