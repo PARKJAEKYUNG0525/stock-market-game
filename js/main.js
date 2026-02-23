@@ -2,11 +2,37 @@ const username = localStorage.getItem('username');
 const greeting = document.querySelector('h4');
 greeting.textContent = `안녕하세요, ${username}님`;
 
+const products = [
+  { name: "구름 과자 공장", price: 100 },
+  { name: "연금술 제약", price: 1000 },
+  { name: "드래곤 광산", price: 10000 },
+  { name: "거울아 거울아", price: 100000 },
+  { name: "요정의 숲", price: 1000000 }
+];
+
+const tbody = document.getElementById("stock-body");
+
+for (let i = 0; i < products.length; i++) {
+  tbody.innerHTML += `
+    <tr>
+      <td>${products[i].name}</td>
+      <td class="td-price">${products[i].price.toLocaleString()}</td>
+      <td class="td-change">▲0</td>
+      <td>
+        <button type="button" class="btn--small btn--buy" onclick="buyProduct(${i})">구매하기</button>
+        <button type="button" class="btn--small btn--buy" onclick="selProduct(${i})">판매하기</button>
+      </td>
+      <td class="td-wallet">0</td>
+    </tr>
+  `;
+}
+
+let money = document.getElementById("money");
+let prices = document.getElementsByClassName("td-price");
+let wallets = document.getElementsByClassName("td-wallet");
+
 // 상품 구매 함수 (가격만큼 금액 차감)
 function buyProduct(idx) {
-    let money = document.getElementById("money");
-    let prices = document.getElementsByClassName("td-price");
-    let wallets = document.getElementsByClassName("td-wallet");
 
     //1,000 숫자로 만들기 어렵. 순수한 문자열 만들기 위한 메소드
     let price = parseInt(prices[idx].innerText.replace(/,/g, ''));
@@ -26,6 +52,23 @@ function buyProduct(idx) {
     // 보유 수량 증가
     let currentStock = parseInt(wallets[idx].innerText) || 0;
     wallets[idx].innerText = currentStock + 1;
+}
+
+function selProduct(idx) {
+
+    let price = parseInt(prices[idx].innerText.replace(/,/g, ''));
+    let currentMoney = parseInt(money.innerText.replace(/,/g, ''));
+    let currentStock = parseInt(wallets[idx].innerText) || 0;
+
+    if (currentStock <= 0) {
+        alert("판매할 수량이 없습니다");
+        return;
+    }
+
+    currentMoney += price;
+    money.innerText = currentMoney.toLocaleString();
+
+    wallets[idx].innerText = currentStock - 1;
 }
 
 function buy(idx) {
