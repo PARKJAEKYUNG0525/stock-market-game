@@ -203,6 +203,16 @@ main {
 
 .btn--buy {
     white-space: nowrap;
+    background-color: #ffffff;
+    color: #4CAF50;
+    border: 1.5px solid #4CAF50;
+}
+
+.btn--sell {
+    white-space: nowrap;
+    background-color: #ffffff;
+    color: #e53935;
+    border: 1.5px solid #e53935;
 }
 
 .btn--end {

@@ -5,6 +5,11 @@ import {
   doc,
   setDoc,
   getDoc,
+  getDocs,
+  collection,
+  orderBy,
+  limit,
+  query,
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
@@ -41,11 +46,11 @@ for (let i = 0; i < products.length; i++) {
       <td>${products[i].name}</td>
       <td class="td-price">${products[i].price.toLocaleString()}</td>
       <td class="td-change">▲0</td>
-      <td>
-        <button type="button" class="btn--small btn--buy" onclick="buyProduct(${i})">구매하기</button>
-        <button type="button" class="btn--small btn--buy" onclick="selProduct(${i})">판매하기</button>
-      </td>
       <td class="td-wallet">0</td>
+      <td>
+        <button type="button" class="btn--small btn--buy" onclick="buyProduct(${i})">구매</button>
+        <button type="button" class="btn--small btn--sell" onclick="selProduct(${i})">판매</button>
+      </td>
     </tr>
   `;
 }
@@ -172,6 +177,8 @@ async function saveMoney() {
     },
     { merge: true },
   ); // merge: true → username, email 등 기존 필드 유지!
+
+  loadLeaderboard(); // 저장 후 랭킹 갱신
 }
 
 // Firebase에서 보유금액 불러오기
@@ -185,10 +192,37 @@ async function loadMoney() {
   }
 }
 
+// 보유 자산 Top5 랭킹 불러오기
+async function loadLeaderboard() {
+  // users 컬렉션에서 money 기준 내림차순으로 5명 가져오기
+  const q = query(collection(db, "users"), orderBy("money", "desc"), limit(5));
+  const snapshot = await getDocs(q);
+
+  const lbTbody = document.querySelector(".lb-table tbody");
+  lbTbody.innerHTML = ""; // 기존 하드코딩 데이터 초기화
+
+  const ranks = ["1st", "2nd", "3rd", "4th", "5th"];
+
+  snapshot.docs.forEach((docSnap, i) => {
+    const data = docSnap.data();
+    const username = data.username || "알 수 없음";
+    const money = data.money !== undefined ? data.money.toLocaleString() : "0";
+
+    lbTbody.innerHTML += `
+      <tr>
+        <td>${ranks[i]}</td>
+        <td>${username}</td>
+        <td>${money}</td>
+      </tr>
+    `;
+  });
+}
+
 // 로그인 상태 감지 → 자동 불러오기
 auth.onAuthStateChanged((user) => {
   if (user) {
     loadMoney();
+    loadLeaderboard();
   } else {
     // 로그인 안 된 상태면 로그인 페이지로
     window.location.href = "login.html";
