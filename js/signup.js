@@ -17,22 +17,22 @@ const auth = getAuth(app);
 const db   = getFirestore(app);
 
 function showError(msg) {
-  const el = document.getElementById('error-msg');
+  const el = document.querySelector('#error-msg');
   el.textContent   = msg;
   el.style.display = 'block';
 }
 
 function hideError() {
-  document.getElementById('error-msg').style.display = 'none';
+  document.querySelector('#error-msg').style.display = 'none';
 }
 
 async function doSignup() {
   hideError();
 
-  const username = document.getElementById('username').value.trim();
-  const email    = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const confirm  = document.getElementById('confirm').value;
+  const username = document.querySelector('#username').value.trim();
+  const email    = document.querySelector('#email').value.trim();
+  const password = document.querySelector('#password').value;
+  const confirm  = document.querySelector('#confirm').value;
 
   // 빈값 검사
   if (!username) { showError('아이디를 입력해주세요.'); return; }
@@ -88,12 +88,12 @@ async function doSignup() {
 }
 
 function clearForm() {
-  document.getElementById('username').value = '';
-  document.getElementById('email').value    = '';
-  document.getElementById('password').value = '';
-  document.getElementById('confirm').value  = '';
+  document.querySelector('#username').value = '';
+  document.querySelector('#email').value    = '';
+  document.querySelector('#password').value = '';
+  document.querySelector('#confirm').value  = '';
   hideError();
-  document.getElementById('username').focus();
+  document.querySelector('#username').focus();
 }
 
 window.doSignup  = doSignup;

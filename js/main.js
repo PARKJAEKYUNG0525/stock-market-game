@@ -33,7 +33,7 @@ const products = [
   { name: "요정의 숲", price: 1000000 },
 ];
 
-const tbody = document.getElementById("stock-body");
+const tbody = document.querySelector("#stock-body");
 
 for (let i = 0; i < products.length; i++) {
   tbody.innerHTML += `
@@ -50,12 +50,15 @@ for (let i = 0; i < products.length; i++) {
   `;
 }
 
-let money = document.getElementById("money");
-let prices = document.getElementsByClassName("td-price");
-let wallets = document.getElementsByClassName("td-wallet");
+let money = document.querySelector("#money");
+let prices = document.querySelectorAll(".td-price");
+let wallets = document.querySelectorAll(".td-wallet");
 
 // 상품 구매 함수 (가격만큼 금액 차감)
 function buyProduct(idx) {
+  prices = document.querySelectorAll(".td-price");
+  wallets = document.querySelectorAll(".td-wallet");
+
   //1,000 숫자로 만들기 어렵. 순수한 문자열 만들기 위한 메소드
   let price = parseInt(prices[idx].innerText.replace(/,/g, ""));
   let currentMoney = parseInt(money.innerText.replace(/,/g, ""));
@@ -79,6 +82,9 @@ function buyProduct(idx) {
 }
 
 function selProduct(idx) {
+  prices = document.querySelectorAll(".td-price");
+  wallets = document.querySelectorAll(".td-wallet");
+
   let price = parseInt(prices[idx].innerText.replace(/,/g, ""));
   let currentMoney = parseInt(money.innerText.replace(/,/g, ""));
   let currentStock = parseInt(wallets[idx].innerText) || 0;
@@ -97,10 +103,10 @@ function selProduct(idx) {
 }
 
 function buy(idx) {
-  let money = document.getElementById("money");
-  let prices = document.getElementsByClassName("td-price");
-  let wallets = document.getElementsByClassName("td-wallet");
-  let inputs = document.getElementsByClassName("input");
+  let money = document.querySelector("#money");
+  let prices = document.querySelectorAll(".td-price");
+  let wallets = document.querySelectorAll(".td-wallet");
+  let inputs = document.querySelectorAll(".input");
 
   let price = parseInt(prices[idx].innerText);
   let qty = parseInt(inputs[idx].value);
@@ -126,10 +132,10 @@ function buy(idx) {
 }
 
 function sell(idx) {
-  let money = document.getElementById("money");
-  let prices = document.getElementsByClassName("price");
-  let wallets = document.getElementsByClassName("wallet");
-  let inputs = document.getElementsByClassName("input");
+  let money = document.querySelector("#money");
+  let prices = document.querySelectorAll(".price");
+  let wallets = document.querySelectorAll(".wallet");
+  let inputs = document.querySelectorAll(".input");
 
   let price = parseInt(prices[idx].innerText);
   let qty = parseInt(inputs[idx].value);
@@ -288,56 +294,18 @@ class makeEventSentence {
   constructor() {
     this.tags = ["[전령의 외침] ", "[긴급 양피지] ", "[수정구슬 예언] "];
     this.actors = [
-      "백설공주",
-      "산타클로스",
-      "헨젤",
-      "앨리스",
-      "찰리",
-      "엘사",
-      "매드 연금술사",
-      "숲속 마녀",
-      "유니콘",
-      "파우스트",
-      "닥터 스트레인지",
-      "잠자는 드래곤",
-      "아기돼지 삼형제",
-      "불사조",
-      "캘시퍼",
-      "일곱 난쟁이",
-      "말레피센트",
-      "지니",
-      "피노키오",
-      "전령 비둘기",
-      "마법의 소라고둥",
-      "팅커벨",
-      "아리에티",
-      "토토로",
-      "요정 대모",
-      "포뇨",
-      "밤비",
+      "백설공주", "산타클로스", "헨젤", "앨리스", "찰리", "엘사",
+      "매드 연금술사", "숲속 마녀", "유니콘", "파우스트", "닥터 스트레인지",
+      "잠자는 드래곤", "아기돼지 삼형제", "불사조", "캘시퍼", "일곱 난쟁이",
+      "말레피센트", "지니", "피노키오", "전령 비둘기", "마법의 소라고둥",
+      "팅커벨", "아리에티", "토토로", "요정 대모", "포뇨", "밤비",
     ];
     this.items = [
-      "얼음 아이스크림",
-      "각설탕 조각",
-      "투명 젤리",
-      "무지개 도넛",
-      "몸이 커지는 약",
-      "영생의 포션",
-      "용기 충전 앰플",
-      "사랑의 묘약",
-      "마력 수정",
-      "드래곤의 숨결",
-      "황금 알",
-      "영롱한 운석",
-      "말하는 거울",
-      "수정구슬",
-      "예언의 양피지",
-      "텔레파시 보석",
-      "요정 가루",
-      "잎사귀 우산",
-      "빛나는 씨앗",
-      "반딧불 랜턴",
-      "이슬 방울",
+      "얼음 아이스크림", "각설탕 조각", "투명 젤리", "무지개 도넛",
+      "몸이 커지는 약", "영생의 포션", "용기 충전 앰플", "사랑의 묘약",
+      "마력 수정", "드래곤의 숨결", "황금 알", "영롱한 운석", "말하는 거울",
+      "수정구슬", "예언의 양피지", "텔레파시 보석", "요정 가루", "잎사귀 우산",
+      "빛나는 씨앗", "반딧불 랜턴", "이슬 방울",
     ];
     //객체(Object) 형태, key값(UP, DOWN, RANDOM)을 가지며, 각각 리스트[]를 담고 있다
     this.types = {

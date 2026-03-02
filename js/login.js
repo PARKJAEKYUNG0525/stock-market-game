@@ -18,9 +18,9 @@ const auth = getAuth(app);
 const db   = getFirestore(app);
 
 async function doLogin() {
-  const id       = document.getElementById('userId').value.trim();
-  const pw       = document.getElementById('userPw').value;
-  const errorMsg = document.getElementById('error-msg');
+  const id       = document.querySelector('#userId').value.trim();
+  const pw       = document.querySelector('#userPw').value;
+  const errorMsg = document.querySelector('#error-msg');
 
   if (!id || !pw) {
     errorMsg.textContent   = '아이디와 비밀번호를 입력해주세요.';
@@ -57,8 +57,8 @@ async function doLogin() {
 
   } catch (err) {
     errorMsg.style.display = 'block';
-    document.getElementById('userPw').value = '';
-    document.getElementById('userPw').focus();
+    document.querySelector('#userPw').value = '';
+    document.querySelector('#userPw').focus();
 
     const messages = {
       'auth/invalid-credential': '아이디 또는 비밀번호가 잘못되었습니다.',
@@ -75,10 +75,10 @@ function handleEnter(event) {
 }
 
 function clearForm() {
-  document.getElementById('userId').value            = '';
-  document.getElementById('userPw').value            = '';
-  document.getElementById('error-msg').style.display = 'none';
-  document.getElementById('userId').focus();
+  document.querySelector('#userId').value            = '';
+  document.querySelector('#userPw').value            = '';
+  document.querySelector('#error-msg').style.display = 'none';
+  document.querySelector('#userId').focus();
 }
 
 //window(전역객체)에 연결
