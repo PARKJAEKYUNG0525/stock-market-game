@@ -34,6 +34,12 @@ async function doSignup() {
   const password = document.getElementById('password').value;
   const confirm  = document.getElementById('confirm').value;
 
+  // 빈값 검사
+  if (!username) { showError('아이디를 입력해주세요.'); return; }
+  if (!email)    { showError('이메일을 입력해주세요.'); return; }
+  if (!password) { showError('비밀번호를 입력해주세요.'); return; }
+  if (!confirm)  { showError('비밀번호 확인을 입력해주세요.'); return; }
+
   // 유효성 검사
   if (!/^[a-zA-Z0-9_]{4,20}$/.test(username)) {
     showError('아이디: 4~20자, 영문/숫자/_ 만 허용됩니다.'); return;
